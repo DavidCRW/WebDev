@@ -21,7 +21,7 @@
         this.id = id
     };
 
-    // Two different arrays and two different index
+    // Two different arrays and index
     let plusArray = [];
     let minusArray = [];
     let index = [0 , 0]
