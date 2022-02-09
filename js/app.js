@@ -1,5 +1,4 @@
 // init
-(function () {
     document.querySelector(".koltsegvetes__ertek").innerHTML = 0 + "Ft";
     document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = 0 + "Ft";
     document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = 0 + "Ft";
@@ -11,7 +10,6 @@
     "November", "December"]
     document.querySelector(".koltsegvetes__cim--honap").innerHTML =
     Months[new Date().getMonth()];
-})();
 
 // Data module
 
