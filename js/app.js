@@ -1,8 +1,8 @@
 // init
 (function () {
-    document.querySelector(".koltsegvetes__ertek").innerHTML = 0;
-    document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = 0;
-    document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = 0;
+    document.querySelector(".koltsegvetes__ertek").innerHTML = 0 + "Ft";
+    document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = 0 + "Ft";
+    document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = 0 + "Ft";
     document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 0 + "%";
 
     // Date Month as a name
@@ -26,11 +26,10 @@
     // Two different arrays and two different index
     let plusArray = [];
     let minusArray = [];
-    let plusIndex = 0;
-    let minusIndex = 0;
+    let index = [0 , 0]
 
     // Income and Outcome
-    let price = [0 , 0]
+    let amount = [0 , 0]
 //----------------------------------------------------------------------//
 
 
@@ -49,50 +48,52 @@
             let newItemPlus = new Constr(type, descript, value, id);
             plusArray.push(newItemPlus);
             let pont;
-            price[0] += newItemPlus.value;
+            amount[0] += newItemPlus.value;
         } else{
             let newItemMinus = new Constr(type, descript, value, id);
             minusArray.push(newItemMinus);
-            price[1] += newItemMinus.value;
+            amount[1] += newItemMinus.value;
         }
 
         //userInterface
 
         if(type === "plusz"){
         let htmlPlus = `
-        <div class="tetel clearfix" id="${plusArray[plusIndex].id}">
-            <div class="tetel__leiras">${plusArray[plusIndex].descript}</div>
+        <div class="tetel clearfix" id="${plusArray[index[0]].id}">
+            <div class="tetel__leiras">${plusArray[index[0]].descript}</div>
             <div class="right clearfix">
-                <div class="tetel__ertek">${plusArray[plusIndex].value}</div>
+                <div class="tetel__ertek">${plusArray[index[0]].value} Ft</div>
                 <div class="tetel__torol">
                     <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                 </div>
             </div>
         </div>
         `
-        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = price[0];
+        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = amount[0] + "Ft";
         document.querySelector(".bevetelek__lista").insertAdjacentHTML("afterbegin", htmlPlus);
-        plusIndex++;
+        index[0]++;
 
         }else{
         let htmlMinus = `
-        <div class="tetel clearfix" id="${minusArray[minusIndex].id}">
-            <div class="tetel__leiras">${minusArray[minusIndex].descript}</div>
+        <div class="tetel clearfix" id="${minusArray[index[1]].id}">
+            <div class="tetel__leiras">${minusArray[index[1]].descript}</div>
             <div class="right clearfix">
-                <div class="tetel__ertek">${minusArray[minusIndex].value}</div>
+                <div class="tetel__ertek">${minusArray[index[1]].value} Ft</div>
                 <div class="tetel__torol">
                     <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                 </div>
             </div>
         </div>
         `
-        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = price[1];
+        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = amount[1] + "Ft";
         document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin", htmlMinus);
-        minusIndex++;
+        index[1]++;
         }
         
-        // Price calculate
-        document.querySelector(".koltsegvetes__ertek").innerHTML = price[0] - price[1];
+        // Amount calculate
+        document.querySelector(".koltsegvetes__ertek").innerHTML = amount[0] - amount[1] + "Ft";
+        // Percent calculate
+        document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = (amount[1] / amount[0]) * 100 + "%";
     }
 
     // Onclick event
@@ -101,4 +102,3 @@
     document.onkeydown = function(event){
         event.key === "Enter" ? eventInput() : "";
     }
-
