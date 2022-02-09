@@ -1,8 +1,4 @@
 // init
-    document.querySelector(".koltsegvetes__ertek").innerHTML = 0 + "Ft";
-    document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = 0 + "Ft";
-    document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = 0 + "Ft";
-    document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 0 + "%";
 
     // Date Month as a name
     const Months = ["Január", "Február" , "Március" , "Április",
@@ -83,7 +79,7 @@
             </div>
         </div>
         `
-        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = amount[1] + "Ft";
+        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + amount[1] + "Ft";
         document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin", htmlMinus);
         index[1]++;
         }
