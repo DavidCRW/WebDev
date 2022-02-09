@@ -37,7 +37,6 @@
         }
 
         //userInterface
-//a
         if(type === "plusz"){
         let htmlPlus = `
         <div class="tetel clearfix" id="${plusArray[plusIndex].id}">
