@@ -88,6 +88,14 @@
         document.querySelector(".koltsegvetes__ertek").innerHTML = amount[0] - amount[1] + "Ft";
         // Percent calculate
         document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = (amount[1] / amount[0]) * 100 + "%";
+        // Clear input field
+        let fields = document.querySelectorAll(".hozzaad__ertek , .hozzaad__leiras");
+        let fieldsArray = Array.prototype.slice.call(fields);
+
+        fieldsArray.forEach(function(currentValue, index, array){
+            currentValue.value = "";
+        });
+        fieldsArray[0].focus();
     }
 
     // Onclick event
