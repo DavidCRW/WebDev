@@ -89,8 +89,14 @@
 
         // Amount calculate
         document.querySelector(".koltsegvetes__ertek").innerHTML = amount[0] - amount[1] + "Ft";
-        // Percent calculate
-        document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = (amount[1] / amount[0]) * 100 + "%";
+
+        // Percent calculate, Math floor round and calculate if the amount[0] is bigger than 0
+        if(amount[0] > 0){
+            document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = Math.round((amount[1] / amount[0]) * 100) + "%";
+        } else{
+            document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = "0%";
+        };
+       
 
 
 
