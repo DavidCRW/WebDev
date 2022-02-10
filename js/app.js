@@ -37,6 +37,8 @@
         let value = Number(document.querySelector(".hozzaad__ertek").value);
         let id = "id" + Math.random().toString(16).slice(2);
 
+        // Input field isNaN and empty
+        if(descript !== "" && !isNaN(value) && value > 0){
         // New item push to Arrays
         if(type === "plusz"){
             let newItemPlus = new Constr(type, descript, value, id);
@@ -83,11 +85,15 @@
         document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin", htmlMinus);
         index[1]++;
         }
-        
+        }
+
         // Amount calculate
         document.querySelector(".koltsegvetes__ertek").innerHTML = amount[0] - amount[1] + "Ft";
         // Percent calculate
         document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = (amount[1] / amount[0]) * 100 + "%";
+
+
+
         // Clear input field
         let fields = document.querySelectorAll(".hozzaad__ertek , .hozzaad__leiras");
         let fieldsArray = Array.prototype.slice.call(fields);
