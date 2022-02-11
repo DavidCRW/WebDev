@@ -6,6 +6,7 @@
     "November", "December"]
     document.querySelector(".koltsegvetes__cim--honap").innerHTML =
     Months[new Date().getMonth()];
+//----------------------------------------------------------------------//
 
 // Data module
 
@@ -20,7 +21,10 @@
     // Two different arrays and index
     let plusArray = [];
     let minusArray = [];
+    
     let index = [0 , 0]
+    let plusIndex = 0;
+    let minusIndex = 1;
 
     // Income and Outcome
     let amount = [0 , 0]
@@ -55,10 +59,10 @@
 
         if(type === "plusz"){
         let htmlPlus = `
-        <div class="tetel clearfix" id="${plusArray[index[0]].id}">
-            <div class="tetel__leiras">${plusArray[index[0]].descript}</div>
+        <div class="tetel clearfix" id="${plusArray[plusIndex].id}">
+            <div class="tetel__leiras">${plusArray[plusIndex].descript}</div>
             <div class="right clearfix">
-                <div class="tetel__ertek">${plusArray[index[0]].value} Ft</div>
+                <div class="tetel__ertek">${plusArray[plusIndex].value} Ft</div>
                 <div class="tetel__torol">
                     <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                 </div>
@@ -67,14 +71,14 @@
         `
         document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = amount[0] + "Ft";
         document.querySelector(".bevetelek__lista").insertAdjacentHTML("afterbegin", htmlPlus);
-        index[0]++;
+        plusIndex++;
 
         }else{
         let htmlMinus = `
-        <div class="tetel clearfix" id="${minusArray[index[1]].id}">
-            <div class="tetel__leiras">${minusArray[index[1]].descript}</div>
+        <div class="tetel clearfix" id="${minusArray[minusIndex].id}">
+            <div class="tetel__leiras">${minusArray[minusIndex].descript}</div>
             <div class="right clearfix">
-                <div class="tetel__ertek">${minusArray[index[1]].value} Ft</div>
+                <div class="tetel__ertek">${minusArray[minusIndex].value} Ft</div>
                 <div class="tetel__torol">
                     <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                 </div>
@@ -83,7 +87,7 @@
         `
         document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + amount[1] + "Ft";
         document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin", htmlMinus);
-        index[1]++;
+        minusIndex++;
         }
         }
 
@@ -96,9 +100,6 @@
         } else{
             document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = "0%";
         };
-       
-
-
 
         // Clear input field
         let fields = document.querySelectorAll(".hozzaad__ertek , .hozzaad__leiras");
@@ -110,9 +111,29 @@
         fieldsArray[0].focus();
     }
 
+
+
+    //Input values and item remove
+    let RemoveInput = function(event){
+        let itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+        let foundIndex;
+        for (let index = 0; index < plusArray.length; index++){
+            if(plusArray[index].id === itemID){
+                foundIndex = index;
+                break;
+            }
+        }
+        console.log(plusArray[foundIndex].id);
+        plusArray.splice(foundIndex, 1);
+    }
+
+    
     // Onclick event
     document.querySelector(".hozzaad__gomb").onclick = eventInput;
     // Onkeyboard event
     document.onkeydown = function(event){
         event.key === "Enter" ? eventInput() : "";
     }
+    // Remove click event
+    document.querySelector(".kontener").onclick = RemoveInput;
