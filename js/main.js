@@ -127,9 +127,7 @@
     // Clear input fields
     function clearFields(){
         let fields = document.querySelectorAll(".hozzaad__leiras , .hozzaad__ertek");
-        let fieldsArray = Array.prototype.slice.call(fields);
-
-        fieldsArray.forEach(function(input){
+        fields.forEach(function(input){
             input.value = "";
         });
     };
@@ -144,7 +142,7 @@
             if(objArrays[i].id === itemID){
                 foundIndex = i;
                 objArrays.splice(foundIndex, 1);
-                console.log(foundIndex);
+                console.log(this);
                 break;
             };
         };
