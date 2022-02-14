@@ -4,7 +4,8 @@
     document.querySelector(".hozzaad__gomb").addEventListener("click" , function(){
     inputToObject();
     inputToUI();
-    clearFields()
+    clearFields();
+    totalVal();
     });
 
     // Keyboard event
@@ -12,7 +13,8 @@
         if(event.key === "Enter"){
             inputToObject();
             inputToUI();
-            clearFields()
+            clearFields();
+            totalVal();
         }else {""}
     };
 
@@ -112,22 +114,21 @@
             </div>`)
         }
         index++;
+    };
 
-        // Total values
+    // Total values
+    function totalVal(){
         document.querySelector(".koltsegvetes__ertek").innerHTML = totalValues[0] - totalValues[1] + "Ft";
         document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = totalValues[0] + "Ft";
         document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + totalValues[1] + "Ft";
-        let percentage = (function(){
             if(totalValues[0] > 0){
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 
                 Math.round((totalValues[1] / totalValues[0]) * 100) + "%";
             }else{
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = "0%"; 
-            }
-        })(); 
+            }  
     };
-
-
+   
     // Clear input fields
     function clearFields(){
         let fields = document.querySelectorAll(".hozzaad__leiras , .hozzaad__ertek");
