@@ -15,14 +15,14 @@
             inputToUI();
             clearFields();
             totalVal();
-        }else {""}
+        }else return;
     };
 
     // Remove event
     document.querySelector(".kontener").addEventListener("click" , removeItems);
 
     // Date event
-    date();
+    months();
 
 //--------------------------------------------------------------------------------//
 // Data module
@@ -45,7 +45,7 @@
 // Functions module
 
     // Date function
-    function date(){
+    function months(){
         let month = new Date().getMonth();
         let monthAsName = ["Január", "Február" , "Március" , "Április",
         "Május", "Június", "Július", "Augusztus", "Szeptember" , "Október",
@@ -67,7 +67,7 @@
             let newObj = new ConstObject(inputValues.typeValue , inputValues.textValue , inputValues.priceValue, inputValues.id)
             objArrays.push(newObj);    
         }else{
-            ""
+            return;
         }
 
         // totalValue function to totalValues array
