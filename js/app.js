@@ -47,7 +47,6 @@
         if(type === "plusz"){
             let newItemPlus = new Constr(type, descript, value, id);
             plusArray.push(newItemPlus);
-            let pont;
             amount[0] += newItemPlus.value;
         } else{
             let newItemMinus = new Constr(type, descript, value, id);
@@ -56,7 +55,6 @@
         }
 
         //userInterface
-
         if(type === "plusz"){
         let htmlPlus = `
         <div class="tetel clearfix" id="${plusArray[plusIndex].id}">
@@ -90,7 +88,6 @@
         minusIndex++;
         }
         }
-
         // Amount calculate
         document.querySelector(".koltsegvetes__ertek").innerHTML = amount[0] - amount[1] + "Ft";
 
@@ -132,8 +129,6 @@
     // Onclick event
     document.querySelector(".hozzaad__gomb").onclick = eventInput;
     // Onkeyboard event
-    document.onkeydown = function(event){
-        event.key === "Enter" ? eventInput() : "";
-    }
+    document.onkeydown = function(event){ event.key === "Enter" ? eventInput() : ""; }
     // Remove click event
     document.querySelector(".kontener").onclick = RemoveInput;
