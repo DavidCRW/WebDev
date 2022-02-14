@@ -38,9 +38,6 @@
     // Array for objects
     let objArrays = [];
 
-    // Index for arrays
-    let index = 0;
-
     // Array for total values
     let totalValues = [0 , 0];
 
@@ -76,7 +73,7 @@
         // totalValue function to totalValues array
         
         let totalValue = (function(){
-            if(objArrays[index].type === "plusz"){
+            if(objArrays[objArrays.length - 1].type === "plusz"){
                 totalValues[0] += inputValues.priceValue;
             } else{
                 totalValues[1] += inputValues.priceValue;
@@ -87,13 +84,12 @@
 
     // Input values to UI
     function inputToUI(){
-        
-        if(objArrays[index].type === "plusz"){
+        if(objArrays[objArrays.length - 1].type === "plusz"){
             document.querySelector(".bevetelek__lista").insertAdjacentHTML("afterbegin",
-            `<div class="tetel clearfix" id="${objArrays[index].id}">
-                <div class="tetel__leiras">${objArrays[index].text}</div>
+            `<div class="tetel clearfix" id="${objArrays[objArrays.length - 1].id}">
+                <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
-                    <div class="tetel__ertek">+ ${objArrays[index].price} Ft</div>
+                    <div class="tetel__ertek">+ ${objArrays[objArrays.length - 1].price} Ft</div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                     </div>
@@ -102,10 +98,10 @@
 
         }else{
             document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin",
-            `<div class="tetel clearfix" id="${objArrays[index].id}">
-                <div class="tetel__leiras">${objArrays[index].text}</div>
+            `<div class="tetel clearfix" id="${objArrays[objArrays.length - 1].id}">
+                <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
-                    <div class="tetel__ertek">- ${objArrays[index].price} Ft</div>
+                    <div class="tetel__ertek">- ${objArrays[objArrays.length - 1].price} Ft</div>
                     <div class="tetel__szazalek">0%</div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
@@ -113,7 +109,6 @@
                 </div>
             </div>`)
         }
-        index++;
     };
 
     // Total values
