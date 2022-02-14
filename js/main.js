@@ -136,7 +136,7 @@
     // Remove items
     function removeItems(event){
         let itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
-
+        document.getElementById(itemID).remove();
         let foundIndex;
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].id === itemID){
