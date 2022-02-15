@@ -109,6 +109,7 @@
     };
 
 
+    
 
     function percentCalc(){
         for(let i = 0; i < objArrays.length; i++){
