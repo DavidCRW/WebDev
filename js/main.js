@@ -30,11 +30,12 @@
 // Data module
 
     // Constructor objectum
-    let ConstObject = function(type , text , price , id){
+    let ConstObject = function(type , text , price , id, percent){
         this.type = type,
         this.text = text,
         this.price = price,
-        this.id = id
+        this.id = id,
+        this.percent = percent
     };
 
     // Array for objects
@@ -62,11 +63,13 @@
             typeValue : document.querySelector(".hozzaad__tipus").value,
             textValue : document.querySelector(".hozzaad__leiras").value,
             priceValue : Number(document.querySelector(".hozzaad__ertek").value),
-            id : "id" + Math.random().toString(16).slice(2)
+            id : "id" + Math.random().toString(16).slice(2),
+            percent: "",
         };
 
+
         if(inputValues.textValue !== "" && !isNaN(inputValues.priceValue)){
-            let newObj = new ConstObject(inputValues.typeValue , inputValues.textValue , inputValues.priceValue, inputValues.id)
+            let newObj = new ConstObject(inputValues.typeValue , inputValues.textValue , inputValues.priceValue, inputValues.id, inputValues.percent)
             objArrays.push(newObj);    
         }else{
             return;
@@ -95,16 +98,29 @@
                 <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
                     <div class="tetel__ertek">- ${objArrays[objArrays.length - 1].price} Ft</div>
-                    <div class="tetel__szazalek">0%</div>
+                    <div class="tetel__szazalek"></div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                     </div>
                 </div>
             </div>`)
+            percentCalc() 
+        }  
+    };
+
+
+
+    function percentCalc(){
+        for(let i = 0; i < objArrays.length; i++){
+            document.querySelector(".tetel__szazalek").innerHTML = 
+            objArrays[objArrays.length - 1].percent = ((objArrays[objArrays.length - 1].price) / (valuesArray[1]));
+            console.log(objArrays);
+            break;
         }
     };
 
-    
+
+
     // totalValue function to totalValues array
     let values = function(){
         valuesArray[0] = 0;
@@ -126,7 +142,7 @@
         document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + valuesArray[1] + "Ft";
             if(valuesArray[0] > 0){
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 
-                Math.round((valuesArray[1] / valuesArray[0]) * 100) + "%";
+                Math.round(valuesArray[1] / valuesArray[0] * 100) + "%";
             }else{
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = "0%"; 
             }  
@@ -151,7 +167,6 @@
             if(objArrays[i].id === itemID){
                 foundIndex = i;
                 objArrays.splice(foundIndex, 1);
-                console.log(this);
                 break;
             };
         };
