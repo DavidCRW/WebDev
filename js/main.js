@@ -5,6 +5,7 @@
     inputToObject();
     inputToUI();
     clearFields();
+    values();
     totalVal();
     });
 
@@ -14,6 +15,7 @@
             inputToObject();
             inputToUI();
             clearFields();
+            values();
             totalVal();
         }else return;
     };
@@ -39,7 +41,7 @@
     let objArrays = [];
 
     // Array for total values
-    let totalValues = [0 , 0];
+    let valuesArray = [0 , 0];
 
 //--------------------------------------------------------------------------------//
 // Functions module
@@ -70,15 +72,6 @@
             return;
         }
 
-        // totalValue function to totalValues array
-        
-        let totalValue = (function(){
-            if(objArrays[objArrays.length - 1].type === "plusz"){
-                totalValues[0] += inputValues.priceValue;
-            } else{
-                totalValues[1] += inputValues.priceValue;
-            }
-        })();
     };
 
 
@@ -111,19 +104,35 @@
         }
     };
 
+    
+    // totalValue function to totalValues array
+    let values = function(){
+        valuesArray[0] = 0;
+        valuesArray[1] = 0;
+        for(let i = 0; i < objArrays.length; i++){
+            if(objArrays[i].type === "plusz"){
+                valuesArray[0] += objArrays[i].price
+            }else{
+                valuesArray[1] += objArrays[i].price
+            }
+        }
+    };
+    
+
     // Total values
     function totalVal(){
-        document.querySelector(".koltsegvetes__ertek").innerHTML = totalValues[0] - totalValues[1] + "Ft";
-        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = totalValues[0] + "Ft";
-        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + totalValues[1] + "Ft";
-            if(totalValues[0] > 0){
+        document.querySelector(".koltsegvetes__ertek").innerHTML = valuesArray[0] - valuesArray[1] + "Ft";
+        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = valuesArray[0] + "Ft";
+        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + valuesArray[1] + "Ft";
+            if(valuesArray[0] > 0){
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 
-                Math.round((totalValues[1] / totalValues[0]) * 100) + "%";
+                Math.round((valuesArray[1] / valuesArray[0]) * 100) + "%";
             }else{
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = "0%"; 
             }  
     };
-   
+
+
     // Clear input fields
     function clearFields(){
         let fields = document.querySelectorAll(".hozzaad__leiras , .hozzaad__ertek");
@@ -132,7 +141,7 @@
         });
     };
 
-    
+
     // Remove items
     function removeItems(event){
         let itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
@@ -146,5 +155,7 @@
                 break;
             };
         };
+        values();
+        totalVal();
     };
  
