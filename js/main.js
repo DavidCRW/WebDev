@@ -7,6 +7,7 @@
     clearFields();
     values();
     totalVal();
+    percentCalc()
     });
 
     // Keyboard event
@@ -17,6 +18,7 @@
             clearFields();
             values();
             totalVal();
+            percentCalc()
         }else return;
     };
 
@@ -98,40 +100,31 @@
                 <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
                     <div class="tetel__ertek">- ${objArrays[objArrays.length - 1].price} Ft</div>
-                    <div class="tetel__szazalek"></div>
+                    <div class="tetel__szazalek"> </div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                     </div>
                 </div>
             </div>`)
-            for(let i = 0; i < objArrays.length; i++){
-                if(objArrays[i].type === "minusz"){
-                    objArrays[i].percent = ((objArrays[i].price) / (valuesArray[1]));
-                    console.log(objArrays);
-                }else{
-                    ""
-                }
-            }
-        }
-       // percentCalc()   
+        };
     };
 
-
-    
-
+    // Percent by item
     function percentCalc(){
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].type === "minusz"){
-                objArrays[i].percent = ((objArrays[i].price) / (valuesArray[1]));
-                console.log(objArrays);
-                break;
-            }else{
-                return
+            objArrays[i].percent = (objArrays[i].price / valuesArray[1]) * 100;
             }
         }
     };
-
-
+    function percentCalcToUI(){
+        let all = document.querySelectorAll(".tetel__szazalek");
+        for(let i = 0; i < all.length; i++){
+            all[i].innerHTML = objArrays[i].percent + "%";
+        }
+    }
+    
+    
     // totalValue function to totalValues array
     let values = function(){
         valuesArray[0] = 0;
