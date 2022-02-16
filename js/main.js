@@ -104,8 +104,16 @@
                     </div>
                 </div>
             </div>`)
-            percentCalc() 
-        }  
+            for(let i = 0; i < objArrays.length; i++){
+                if(objArrays[i].type === "minusz"){
+                    objArrays[i].percent = ((objArrays[i].price) / (valuesArray[1]));
+                    console.log(objArrays);
+                }else{
+                    ""
+                }
+            }
+        }
+       // percentCalc()   
     };
 
 
@@ -113,13 +121,15 @@
 
     function percentCalc(){
         for(let i = 0; i < objArrays.length; i++){
-            document.querySelector(".tetel__szazalek").innerHTML = 
-            objArrays[objArrays.length - 1].percent = ((objArrays[objArrays.length - 1].price) / (valuesArray[1]));
-            console.log(objArrays);
-            break;
+            if(objArrays[i].type === "minusz"){
+                objArrays[i].percent = ((objArrays[i].price) / (valuesArray[1]));
+                console.log(objArrays);
+                break;
+            }else{
+                return
+            }
         }
     };
-
 
 
     // totalValue function to totalValues array
