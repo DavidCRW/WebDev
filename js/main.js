@@ -8,6 +8,7 @@
     values();
     totalVal();
     percentCalc()
+    percentCalcToUI()
     });
 
     // Keyboard event
@@ -19,6 +20,7 @@
             values();
             totalVal();
             percentCalc()
+            percentCalcToUI()
         }else return;
     };
 
@@ -46,6 +48,9 @@
     // Array for total values
     let valuesArray = [0 , 0];
 
+    // Index for percent
+    let percentIndex = [];
+
 //--------------------------------------------------------------------------------//
 // Functions module
 
@@ -66,7 +71,7 @@
             textValue : document.querySelector(".hozzaad__leiras").value,
             priceValue : Number(document.querySelector(".hozzaad__ertek").value),
             id : "id" + Math.random().toString(16).slice(2),
-            percent: "",
+            percent: "test",
         };
 
 
@@ -109,20 +114,29 @@
         };
     };
 
+
+
     // Percent by item
     function percentCalc(){
+
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].type === "minusz"){
-            objArrays[i].percent = (objArrays[i].price / valuesArray[1]) * 100;
+            objArrays[i].percent = (objArrays[i].price / valuesArray[1]) * 100;  
+            percentIndex = objArrays.length -1;
             }
         }
+
+        let all = document.querySelectorAll(".tetel__szazalek");
     };
+
+    
+    // Percent to UI
     function percentCalcToUI(){
         let all = document.querySelectorAll(".tetel__szazalek");
         for(let i = 0; i < all.length; i++){
-            all[i].innerHTML = objArrays[i].percent + "%";
+            all[i].innerHTML = objArrays[percentIndex].percent + "%";
         }
-    }
+    };
     
     
     // totalValue function to totalValues array
@@ -176,5 +190,7 @@
         };
         values();
         totalVal();
+        percentCalc()
+        percentCalcToUI()
     };
  
