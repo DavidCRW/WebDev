@@ -48,9 +48,6 @@
     // Array for total values
     let valuesArray = [0 , 0];
 
-    // Index for percent
-    let percentIndex = [];
-
 //--------------------------------------------------------------------------------//
 // Functions module
 
@@ -116,29 +113,43 @@
 
 
 
+
     // Percent by item
     function percentCalc(){
-
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].type === "minusz"){
-            objArrays[i].percent = (objArrays[i].price / valuesArray[1]) * 100;  
-            percentIndex = objArrays.length -1;
+            objArrays[i].percent = (objArrays[i].price / valuesArray[0]) * 100;  
+            }
+        }
+    };
+
+    // Percent to UI
+    let a = 0;
+    function percentCalcToUI(){
+        let all = document.querySelectorAll(".tetel__szazalek");
+        for(let i = 0; i < objArrays.length; i++){
+            if(objArrays[i].type === "minusz"){
+                a = 0;
+                all[a].innerHTML = objArrays[i].percent + "%";
+                a++;
+                console.log(objArrays)
+                console.log(all)
             }
         }
 
-        let all = document.querySelectorAll(".tetel__szazalek");
-    };
-
-    
-    // Percent to UI
-    function percentCalcToUI(){
-        let all = document.querySelectorAll(".tetel__szazalek");
+/*
         for(let i = 0; i < all.length; i++){
-            all[i].innerHTML = objArrays[percentIndex].percent + "%";
+            for(let a = 0; a < objArrays.length; a++){
+                if(objArrays[a].type === "minusz"){
+                    all[i].innerHTML = objArrays[a].percent;
+                    console.log(objArrays)
+                    console.log(all)
+                }
+            }
         }
     };
-    
-    
+    */
+}
     // totalValue function to totalValues array
     let values = function(){
         valuesArray[0] = 0;
@@ -151,7 +162,7 @@
             }
         }
     };
-    
+ 
 
     // Total values
     function totalVal(){
