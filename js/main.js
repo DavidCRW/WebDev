@@ -78,30 +78,31 @@
         }else{
             return;
         }
-
+        
     };
 
 
     // Input values to UI
     function inputToUI(){
+        let number = objArrays[objArrays.length - 1].price;
         if(objArrays[objArrays.length - 1].type === "plusz"){
             document.querySelector(".bevetelek__lista").insertAdjacentHTML("afterbegin",
             `<div class="tetel clearfix" id="${objArrays[objArrays.length - 1].id}">
                 <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
-                    <div class="tetel__ertek">+ ${objArrays[objArrays.length - 1].price} Ft</div>
+                    <div class="tetel__ertek">+ ${new Intl.NumberFormat().format(number)} Ft</div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
                     </div>
                 </div>
             </div>`)
-
+    
         }else{
             document.querySelector(".kiadasok__lista").insertAdjacentHTML("afterbegin",
             `<div class="tetel clearfix" id="${objArrays[objArrays.length - 1].id}">
                 <div class="tetel__leiras">${objArrays[objArrays.length - 1].text}</div>
                 <div class="right clearfix">
-                    <div class="tetel__ertek">- ${objArrays[objArrays.length - 1].price} Ft</div>
+                    <div class="tetel__ertek">- ${new Intl.NumberFormat().format(number)} Ft</div>
                     <div class="tetel__szazalek"> </div>
                     <div class="tetel__torol">
                         <button class="tetel__torol--gomb"><i class="ion-ios-close-outline"></i></button>
@@ -112,44 +113,29 @@
     };
 
 
-
-
     // Percent by item
+    let s = [];
     function percentCalc(){
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].type === "minusz"){
-            objArrays[i].percent = (objArrays[i].price / valuesArray[0]) * 100;  
+            objArrays[i].percent = Math.round((objArrays[i].price / valuesArray[0]) * 100);
             }
-        }
+        } 
     };
 
     // Percent to UI
-    let a = 0;
+    let allLengthMinus = 1;
     function percentCalcToUI(){
         let all = document.querySelectorAll(".tetel__szazalek");
         for(let i = 0; i < objArrays.length; i++){
             if(objArrays[i].type === "minusz"){
-                a = 0;
-                all[a].innerHTML = objArrays[i].percent + "%";
-                a++;
-                console.log(objArrays)
-                console.log(all)
+                all[[all.length] - allLengthMinus].innerHTML = objArrays[i].percent + "%";
+                allLengthMinus++
             }
         }
+        allLengthMinus = 1;
+    }
 
-/*
-        for(let i = 0; i < all.length; i++){
-            for(let a = 0; a < objArrays.length; a++){
-                if(objArrays[a].type === "minusz"){
-                    all[i].innerHTML = objArrays[a].percent;
-                    console.log(objArrays)
-                    console.log(all)
-                }
-            }
-        }
-    };
-    */
-}
     // totalValue function to totalValues array
     let values = function(){
         valuesArray[0] = 0;
@@ -166,9 +152,9 @@
 
     // Total values
     function totalVal(){
-        document.querySelector(".koltsegvetes__ertek").innerHTML = valuesArray[0] - valuesArray[1] + "Ft";
-        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = valuesArray[0] + "Ft";
-        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + valuesArray[1] + "Ft";
+        document.querySelector(".koltsegvetes__ertek").innerHTML = new Intl.NumberFormat().format(valuesArray[0] - valuesArray[1]) + "Ft";
+        document.querySelector(".koltsegvetes__bevetelek--ertek").innerHTML = new Intl.NumberFormat().format(valuesArray[0]) + "Ft";
+        document.querySelector(".koltsegvetes__kiadasok--ertek").innerHTML = "-" + new Intl.NumberFormat().format(valuesArray[1]) + "Ft";
             if(valuesArray[0] > 0){
                 document.querySelector(".koltsegvetes__kiadasok--szazalek").innerHTML = 
                 Math.round(valuesArray[1] / valuesArray[0] * 100) + "%";
@@ -193,7 +179,11 @@
         document.getElementById(itemID).remove();
         let foundIndex;
         for(let i = 0; i < objArrays.length; i++){
-            if(objArrays[i].id === itemID){
+            if(objArrays[i].id === itemID && objArrays[i].type === "minusz"){
+                foundIndex = i;
+                objArrays.splice(foundIndex, 1);
+                break;
+            }else if(objArrays[i].id === itemID){
                 foundIndex = i;
                 objArrays.splice(foundIndex, 1);
                 break;
