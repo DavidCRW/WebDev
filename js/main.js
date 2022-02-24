@@ -1,27 +1,25 @@
 // Controller module
 
+
+    // Functions call
+    function callFunctions(){
+        inputToObject();
+        inputToUI();
+        clearFields();
+        values();
+        totalVal();
+        percentCalc()
+        percentCalcToUI()
+    }
+    
     // Click event
-    document.querySelector(".hozzaad__gomb").addEventListener("click" , function(){
-    inputToObject();
-    inputToUI();
-    clearFields();
-    values();
-    totalVal();
-    percentCalc()
-    percentCalcToUI()
-    });
+    document.querySelector(".hozzaad__gomb").addEventListener("click" , callFunctions);
 
     // Keyboard event
     document.onkeydown = function(event){
         if(event.key === "Enter"){
-            inputToObject();
-            inputToUI();
-            clearFields();
-            values();
-            totalVal();
-            percentCalc()
-            percentCalcToUI()
-        }else return;
+            callFunctions
+        }
     };
 
     // Remove event
